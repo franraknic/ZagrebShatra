@@ -6,9 +6,13 @@ Budući da se radi o slengu koji se uglavnom koristi na ulicama, najbolji primje
 Neki primjeri (probati u prevoditelju):
 
 hrvatski->šatra
-kreten
-boli me
-lete ptice
+<ul>
+<li>kreten</li>
+<li>boli me</li>
+<li>lete ptice</li>
+</ul>
 
 šatra->hrvatski
-žili mi ruka
+<ul>
+<li>žili mi ruka</li>
+</ul>
