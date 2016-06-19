@@ -2,7 +2,7 @@
 #autor: Fran Raknic
 
 samoglasnici = ['a','e','i','o','u']
-interpunkcija = ['.',',',':','?','!',';']
+znakovi = ['.',':',';','!','?']
 
 #TODO:
 #dodati iznimke za rijeci od 3 slova
@@ -12,35 +12,52 @@ interpunkcija = ['.',',',':','?','!',';']
 
 #razdvajanje rijeci na slogove
 def Fslogovi(rijec):
-    slogovi = []
-    for i in range(0, len(rijec)):
-        if rijec[i] in samoglasnici:
-            slogovi.append(rijec[:i+1:])
-            slogovi.append(rijec[i+1::])
-            break
-    return slogovi
+	rijec = rijec.lower()
+	slogovi = []
+	if checkRijec(rijec) == False:
+		slogovi.append(rijec)
+		return slogovi
+	else:
+		for i in range(0, len(rijec)):
+			if rijec[i] in samoglasnici:
+				slogovi.append(rijec[:i+1])
+				slogovi.append(rijec[i+1:])
+				break
+		return slogovi
+	
+def checkRijec(rijec1):
+	if len(rijec1) <= 3:
+		return False
+	else:
+		return True
 
-
-def testWord(rijec):
-    if interpunkcija in rijec:
-        return rijec.pop()
-
-#prevodi prima recenicu, vraca prevedeno
+#prevodi prima recenicu, vraca prevedeno	
 def prevodi(tekst):
-    tmpPrjevod = []
-    prijevod = []
-    tekst = tekst.split()
-
-    for rijec in tekst:
-        tmpPrjevod.append(Fslogovi(rijec))
-    for rijec in tmpPrjevod:
-        prijevod.append(" ")
-        for slog in reversed(rijec):
-            prijevod.append(slog)
-    prijevod = "".join(prijevod)
-    prijevod = prijevod.lstrip()
-    return prijevod.capitalize()
-
+	tmpPrjevod = []
+	prjevod = []
+	tekst = tekst.split()
+	for rijec in tekst:
+		tmpPrjevod.append(Fslogovi(rijec))
+	for rijec in tmpPrjevod:
+		prjevod.append(" ")
+		for slog in reversed(rijec):
+			prjevod.append(slog)
+	prjevod = "".join(prjevod)
+	prjevod = prjevod.lstrip()
+	return prjevod.capitalize()
+	
+#testiranje
 print "Prevodilac HRV u ZG satru\nAutor: Fran Raknic\n\n"
-print prevodi(raw_input("Za prevesti:\n")) + "\n"
-raw_input()
+print "Za izlaz is prevodioca upisite x\n"
+print "Unesite tekst za prijevod!\n"
+
+def interface():
+	usrinput = raw_input()
+	if usrinput == "x":
+		print "Izlazim!"
+	else:
+		print prevodi(usrinput)
+		print "." * 20
+		interface()
+		
+interface()
