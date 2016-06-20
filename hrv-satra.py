@@ -1,12 +1,10 @@
 #prevodilac HRV u ZG-SATRA
 #autor: Fran Raknic
+import string
 
 samoglasnici = ['a','e','i','o','u']
-znakovi = ['.',':',';','!','?']
 
 #TODO:
-#dodati iznimke za rijeci od 3 slova
-#prevodilac satra -> HRV
 #formatirati ispis lowercase, capitalize etc.
 #formatirati input
 
@@ -35,7 +33,9 @@ def checkRijec(rijec1):
 def prevodi(tekst):
 	tmpPrjevod = []
 	prjevod = []
-	tekst = tekst.split()
+	for char in string.punctuation:
+                tekst = tekst.replace(char, " ")
+        tekst = tekst.split()
 	for rijec in tekst:
 		tmpPrjevod.append(Fslogovi(rijec))
 	for rijec in tmpPrjevod:
